@@ -34,15 +34,18 @@ export EDITOR='vim'
 alias ls='ls --color=auto'
 alias grep='grep --color -n'
 alias ll='ls -la'
-alias gita='git add .'
+alias gita='git add'
 alias gitc='git commit -m'
-alias gitp='git push'
+alias gitp='git push --follow-tags'
+alias gitl='git log --all --decorate --graph --oneline'
+alias gitt='git tag -a'
 
-Red="0;31m"
-Green="0;32m"
-Yellow="0;33m"
-Blue="0;34m"
-Purple="0;35m"
+#Red="0;31;40m"
+Green="0;32;40m"
+Yellow="0;33;40m"
+Blue="0;34;40m"
+Purple="0;35;40m"
+BackRedFrontWhiteBold="1;37;41m"
 
 EXIT=0
 
@@ -58,7 +61,7 @@ prompt_name ()
 
 prompt_path ()
 {
-    PWD_H=$([[ $PWD/ = "$HOME"/* ]] && echo "~${PWD#$HOME}" || echo "$PWD")
+    PWD_H=$([[ "$PWD/" = "$HOME"/* ]] && echo "~${PWD#$HOME}" || echo "$PWD")
     echo -e "\033[${Green}$PWD_H\033[m"
 }
 
@@ -70,17 +73,30 @@ prompt_date ()
 
 prompt_error()
 {
-    [ $EXIT -ne 0 ] && echo -e "\033[${Red}$EXIT\033[m"
+    [ $EXIT -ne 0 ] && echo -e "\033[${BackRedFrontWhiteBold} $EXIT \033[m"
 }
 
 print_prompt ()
 {
     EXIT=$?
-    OFFSET=35
     COL=$(tput cols)
+    OFFSET=52
+    [ $EXIT -ne 0 ] && OFFSET=65
+
     PS1L=$(printf "%s %s %s" "$(prompt_name)" "$(prompt_path)" "$(prompt_git)")
     PS1R=$(printf "%s %s" "$(prompt_error)" "$(prompt_date)")
     PS1L_stripped=${PS1L//\x1B\[[0-9;]*m/}
+    PS1R_stripped=${PS1R//\x1B\[[0-9;]*m/}
+
+    if [ $(( ${#PS1R_stripped} + ${#PS1L_stripped} )) -gt $((COL + OFFSET)) ]; then
+        PS1L=$(printf "%s %s" "$(prompt_path)" "$(prompt_git)")
+        PS1R=$(printf "%s" "$(prompt_error)")
+        PS1L_stripped=${PS1L//\x1B\[[0-9;]*m/}
+        PS1R_stripped=${PS1R//\x1B\[[0-9;]*m/}
+        OFFSET=0
+        [ $EXIT -ne 0 ] && OFFSET=39
+    fi
+
     PS1=$(printf "%s%$((COL - ${#PS1L_stripped} + OFFSET))s\n\[\033[00m\]$ " "$PS1L" "$PS1R")
 }
 
