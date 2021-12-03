@@ -1,8 +1,15 @@
 #!/bin/bash
 
 # ~/.bashrc
+# shellcheck source=/home/samuel.quesne/afs/.confs/git-completion.bash
 source ~/afs/.confs/git-completion.bash
+# shellcheck source=/home/samuel.quesne/afs/.confs/git-prompt.sh
 source ~/afs/.confs/git-prompt.sh
+# shellcheck source=/home/samuel.quesne/afs/.confs/.bash_aliases
+#source ~/.bash_aliases
+
+history -a
+
 export GIT_PS1_SHOWDIRTYSTATE=1
 
 # If not running interactively, don't do anything
@@ -38,7 +45,12 @@ alias gita='git add'
 alias gitc='git commit -m'
 alias gitp='git push --follow-tags'
 alias gitl='git log --all --decorate --graph --oneline'
-alias gitt='git tag -a'
+alias gitt='git tag -m "" -a'
+alias gits='git status'
+alias gcca='gcc -Wall -Werror -Wextra -std=c99 -pedantic'
+alias gccc='gcc -Wall -Werror -Wextra -std=c99 -pedantic -lcriterion'
+alias mkrep='~/afs/script/mkrep.sh'
+alias todo="cat ~/afs/TODO"
 
 #Red="0;31;40m"
 Green="0;32;40m"
@@ -101,3 +113,5 @@ print_prompt ()
 }
 
 PROMPT_COMMAND=print_prompt
+
+export CPATH=/run/current-system/sw/include
