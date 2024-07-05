@@ -1,0 +1,20 @@
+#!/bin/sh
+
+STATUS=$(cat /sys/class/power_supply/BAT0/status)
+CAPACITY=$(cat /sys/class/power_supply/BAT0/capacity)
+COLOR="#fabd2f"
+
+if [ "${STATUS}" = 'Discharging' ]; then
+  OUTPUT="DIS ${CAPACITY}% $(acpi -b | awk '{print $5}')"
+  if [ "$CAPACITY" -le 20 ]; then
+    COLOR="#fb4934"
+  fi
+elif [ "${STATUS}" = 'Charging' ]; then
+  OUTPUT="CHA ${CAPACITY}%"
+elif [ "${STATUS}" = 'Full' ]; then
+  OUTPUT="FULL ${CAPACITY}%"
+fi
+
+echo "$OUTPUT"
+echo "$OUTPUT"
+echo "$COLOR"

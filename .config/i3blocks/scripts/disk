@@ -1,0 +1,26 @@
+#!/bin/sh
+
+df -h -P "/" | awk '
+/\/.*/ {
+	# full text
+	print " " $4
+
+	# short text
+	print " " $4
+
+	use=$5
+
+	# no need to continue parsing
+	exit 0
+}
+
+END {
+	gsub(/%$/,"",use)
+	if (100 - use < 10) {
+		print("#FB4934")
+	}
+  else {
+		print("#fabd2f")
+  }
+}
+'

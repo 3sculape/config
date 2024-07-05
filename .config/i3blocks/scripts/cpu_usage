@@ -1,0 +1,9 @@
+#!/bin/sh
+
+USAGE=$(top -bn2 | grep "Cpu(s)" |
+  sed "s/.*, *\([0-9.]*\)%* id.*/\1/" |
+  awk 'END{print 100 - $1}')
+
+echo " ${USAGE}%"
+echo " ${USAGE}%"
+echo "#b8bb26"

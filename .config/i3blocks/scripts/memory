@@ -1,0 +1,53 @@
+#!/bin/sh
+
+awk '
+/^MemTotal:/ {
+	mem_total=$2
+}
+/^MemFree:/ {
+	mem_free=$2
+}
+/^Buffers:/ {
+	mem_free+=$2
+}
+/^Cached:/ {
+	mem_free+=$2
+}
+/^SwapTotal:/ {
+	swap_total=$2
+}
+/^SwapFree:/ {
+	swap_free=$2
+}
+END {
+    s_free=swap_free/1024/1024
+    s_used=(swap_total-swap_free)/1024/1024
+		s_total=swap_total/1024/1024
+
+		m_free=mem_free/1024/1024
+		m_used=(mem_total-mem_free)/1024/1024
+		m_total=mem_total/1024/1024
+
+	s_pct=0
+	if (s_total > 0) {
+		s_pct=s_used/s_total*100
+	}
+
+	m_pct=0
+	if (m_total > 0) {
+		m_pct=m_used/m_total*100
+	}
+
+	printf(" %.1fG/%.1fG (%.f%%)  %.1fG/%.1fG (%.f%%)\n", m_used, m_total, m_pct, s_used, s_total, s_pct)
+
+	printf(" %.f%%  %.f%%\n", m_pct, s_pct)
+
+	# color
+	if (pct > 90) {
+		print("#FB4934")
+	}
+  else {
+		print("#fabd2f")
+  }
+}
+' </proc/meminfo
