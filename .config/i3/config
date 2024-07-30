@@ -200,7 +200,7 @@ bar {
 }
 
 # Backgroud set
-exec_always feh --bg-fill /usr/share/sddm/themes/sugar-candy/Backgrounds/Mountain.jpg
+exec_always feh --bg-max ~/.config/backgrounds/default.png
 
 #Comptile manager
 exec_always --no-startup-id picom -b
