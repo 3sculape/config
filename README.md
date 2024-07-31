@@ -14,11 +14,9 @@
 - neovim
 - feh
 - arandr
-- ttf-awesome-fonts
 - picom
 - man-db
 - man-pages
-- arandr
 - ttf-firacode-nerd
 - i3blocks
 - xsel
@@ -26,13 +24,15 @@
 ## Git packages:
 
 - yay
-- sugar-candy (sddm theme)
 - oh-my-zsh
 - zsh-autosuggestions (omz install)
 - protobuf (nvim parser)
 
 ## YAY packages:
 
+- numix-gtk-theme
+- nordzy-icon-theme-git
+- where-is-my-sddm-theme
 - zsh-theme-powerlevel10k (omz install)
 
 ## Config location
