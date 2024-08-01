@@ -118,3 +118,6 @@ unalias mv
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Created by `pipx` on 2024-07-30 08:17:10
+export PATH="$PATH:/home/squesne/.local/bin"
