@@ -160,6 +160,8 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
+bindsym $mod+Shift+x exec betterlockscreen -l blur
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -209,6 +211,9 @@ exec_always feh --bg-max ~/.config/backgrounds/default.png
 #Comptile manager
 exec_always --no-startup-id picom -b
 exec_always --no-startup-id dunst
+
+# lockscreen managment
+exec_always --no-startup-id betterlockscreen -u ~/.config/backgrounds/default.png --blur 0.5 --span
 
 focus_follows_mouse no
 

@@ -20,6 +20,8 @@
 - ttf-firacode-nerd
 - i3blocks
 - xsel
+- bluez
+- bluez-utils
 
 ## Git packages:
 
@@ -30,6 +32,7 @@
 
 ## YAY packages:
 
+- betterlockscreen
 - numix-gtk-theme
 - nordzy-icon-theme-git
 - where-is-my-sddm-theme
@@ -44,3 +47,8 @@
 - .zshrc -> ~/.zshrc
 
 - .clang-format -> ~/.clang-format
+
+## Systemd
+
+- bluetooth
+- betterlockscreen@$USER
