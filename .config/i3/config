@@ -160,7 +160,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-bindsym $mod+Shift+x exec betterlockscreen -l blur
+bindsym $mod+Shift+x exec betterlockscreen -l color
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -213,7 +213,7 @@ exec_always --no-startup-id picom -b
 exec_always --no-startup-id dunst
 
 # lockscreen managment
-exec_always --no-startup-id betterlockscreen -u ~/.config/backgrounds/default.png --blur 0.5 --span
+exec_always --no-startup-id betterlockscreen -u . --fx color --color 424a3e
 
 focus_follows_mouse no
 
